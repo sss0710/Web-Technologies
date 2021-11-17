@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            class rectangle{
+                constructor(l,w){
+                    this.l=l;
+                    this.w=w;
+                }
+                diplayDimensions(){
+                    document.write("length : "+this.l+" width : "+this.w+"<br>");
+                }
+                displayArea(){
+                    document.write("Area of Rectangle : "+(this.l*this.w)+"<br>");
+                }
+                displayPerimeter(){
+                    document.write("Perimeter of Rectangle : "+(this.l+this.w)*2+"<br>");
+                }
+            }
+            class Circle{
+                constructor(rad){
+                    this.rad=rad;
+                }
+                displayArea(){
+                    document.write("Area of Circle : "+(Math.PI*Math.pow(this.rad,2))+"<br>"); 
+                }
+                displayCircumference(){
+                    document.write("Circumference of Circle : "+(2*Math.PI*this.rad)+"<br>");
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h2>Rectangle and Circle</h2>
+        <script>
+            var r = new rectangle(5,10);
+            r.diplayDimensions();
+            r.displayArea();
+            r.displayPerimeter();
+            var c = new Circle(5);
+            c.displayArea();
+            c.displayCircumference();
+        </script>
+    </body>
+</html>

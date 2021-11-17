@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<title>Compound Interest</title>
+<script>
+	function comp_int()
+	{
+		var p = parseInt(document.getElementById("prin").value);
+		var r = parseInt(document.getElementById("rate").value);
+		var y = parseInt(document.getElementById("period").value);
+		var n1 = (1 + (r/100));
+		var n2 = 1;
+		for(var i = 1; i <= y; i++)
+			n2 = n2 * n1;
+		var n3 = n2 * p;
+		var interest = n3 - p;
+		document.getElementById("intt").value = interest;
+	}
+</script>
+</head>
+<body>
+	<form>
+		Principle: &nbsp;&nbsp;&nbsp;&nbsp; <input name="principle" id="prin"> <br><br>
+		Rate of Interest: &nbsp;&nbsp;&nbsp;&nbsp;<input name="rate" id="rate"> <br><br>
+		Period: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="period" id="period"> <br><br>
+		Interest:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="intt" id="intt" readonly><br>
+		<br>
+		<input type="button" name="calc" value="calculate" onclick="comp_int()">
+	</form>
+</body>
+</html>

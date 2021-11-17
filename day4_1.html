@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Example</title>
+		<script>
+			function f1()
+			{
+				//var name = window.document.forms[0].uname.value;
+				
+				var name = document.getElementById("uname").value;
+				//document.write("hello " + name);
+				
+				document.getElementById("p1").innerHTML = name;
+			}
+		</script>
+	</head>
+	
+	<body>
+		<form>
+			Username: <input name="uname" id="uname"><p>
+			<input type="button" 
+			value="greet user" 
+			onclick="f1()">
+			<br><br><br>
+			<h1>Hello <span id="p1"> </span></h1>
+		</form>
+	</body>
+</html>
+
+	
+	
+	

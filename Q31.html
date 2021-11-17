@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Day5Q30</title>
+    <style>
+        form {
+            border: 3px solid maroon;
+            padding: 30px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+        }
+
+        tr,td { padding:10px;}
+    </style>
+    <script>
+        function validate_and_display(){
+
+            clearSpans();
+
+            var name = document.getElementById("name");
+            var dob = document.getElementById("bdate");
+            var email = document.getElementById("email");
+            var gender = document.getElementsByName("gender");
+            var lucky = document.getElementById("lucky");
+            var foods = document.getElementsByName("foods");
+
+            if( name.value == null || name.value == ""){
+                document.getElementById("error_name").innerHTML= "Mandatory Field";
+                focusOn(name);
+            }
+
+            if( dob.value == null || dob.value == ""){
+                document.getElementById("error_date").innerHTML= "Mandatory Field";
+                focusOn(dob);
+            }
+            if( email.value == null || email.value == ""){
+                document.getElementById("error_email").innerHTML= "Mandatory Field";
+                focusOn(email);
+            }
+            if( gender[0].value.checked == false && gender[1].value.checked==false){
+                document.getElementById("error_gender").innerHTML= "Mandatory Field";
+                focusOn(gender[0]);
+            }
+            if( lucky.value == null || lucky.value == ""){
+                document.getElementById("error_lucky").innerHTML= "Mandatory Field";
+                focusOn(lucky);
+            }
+            if( foods[0].value.checked == false && oods[1].value.checked == false && foods[2].value.checked == false){
+                document.getElementById("error_foods").innerHTML= "Mandatory Field";
+                focusOn(foods[0]);
+            }
+
+            if( name.value.length >10 || !name.value.match(/^[a-zA-Z/ /]+$/))
+            {
+                document.getElementById("error_name").innerHTML= "Only alphabets allowed with maximum length 10";
+                focusOn(name);
+            }
+            
+            if(lucky.value.length != 4)
+            {
+                document.getElementById("error_lucky").innerHTML= "must be of 4 digits";
+                focusOn(lucky);
+            }
+
+            var gender_value= "none";
+            if(gender[0].value.checked == true){
+                gender_value=gender[0].value;
+            }
+            else if (gender[1].value.checked == true){
+                gender_value=gender[1].value ;
+            }
+
+            var fav_foods = [];
+            if(foods[0].value.checked == true){
+                fav_foods.push(foods[0].value);
+            }
+            if (foods[1].value.checked == true){
+                fav_foods.push(foods[1].value);
+            }
+            if (foods[2].value.checked == true){
+                fav_foods.push(foods[2].value);
+            }
+			fav_foods.join(" ");
+
+            var Info = {
+                "Name": name.value,
+                "Birth_date": dob.value,
+                "Email_address": email.value,
+                "Gender": gender_value,
+                "Lucky_Number": lucky.value,
+                "Favorite_food":fav_foods
+
+            };
+
+            var infoTable = "<table cellspacing=0 cellpadding=10 border=1>" +
+                "<tr><td cellspan = '2'>You entered:</td></tr>"+
+                "<tr><td>Name:</td><td>"+Info.Name+"</td></tr>" +
+                "<tr><td>Birth Date:</td><td>"+Info.Birth_date+"</td></tr>" +
+                "<tr><td>Email Address:</td><td>"+Info.Email_address+"</td></tr>" +
+                "<tr><td>Gender:</td><td>"+Info.Gender+"</td></tr>" +
+                "<tr><td>Lucky Number:</td><td>$&ensp;"+Info.Lucky_Number+"</td></tr>" +
+                "<tr><td>Favorite Food:</td><td>$&ensp;"+Info.Favorite_food+"</td></tr>"+
+                "</table>";
+
+
+
+            var myWindow = window.open("","Information details", "toolbar=no,scrollbars=no,resizable=no,width=400,height=400");
+            myWindow.document.write(infoTable);
+
+            return true;
+        }
+		function clearSpans()
+		{
+			document.getElementById("error_name").innerHTML = "";
+            document.getElementById("error_bdate").innerHTML = "";
+            document.getElementById("error_email").innerHTML = "";
+            document.getElementById("error_gender").innerHTML = "";  
+            document.getElementById("error_lucky").innerHTML = "";
+            document.getElementById("error_foods").innerHTML = "";
+        }
+
+        function focusOn(element)
+		{
+			element.focus();
+            return false;     
+        }
+    </script>
+</head>
+
+<body>
+    <form onsubmit="return validate_and_display()">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" id="name" required>&nbsp;<span style="color:red" id="error_name"></span></td>
+            </tr>
+            <tr>
+                <td>Birth Date:</td>
+                <td><input id="bdate" name="bdate" type="date">&nbsp;<span style="color:red" id="error_bdate"></span></td>
+            </tr>
+            <tr>
+                <td>Email Address</td>
+                <td><input id="email" name="email" type="email">&ensp;<span style="color:red" id="error_email">(Use format: name@company.com)</span></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><input type="radio" id="male" name="gender" value="Male">&nbsp;Male&nbsp;<span style="color:red" id="error_gender"></span><br><input type="radio" id="female" name="gender" value="Female">&nbsp;Female
+            </tr>
+            <tr>
+                <td>Lucky Number:</td>
+                <td><input type="text" id="lucky" name="lucky" required>&nbsp;<span style="color:red" id="error_lucky">(A number between 1 and 100)</span></td>
+            </tr>
+            <tr>
+                <td>Favorite Foods:</td>
+                <td><input type="checkbox" id="Pizza" name="foods">&nbsp;Pizza&nbsp;<span style="color:red" id="error_foods"></span><br><input type="checkbox" id="Pasta" name="foods">&nbsp;Pasta<br><input type="checkbox" id="Chinese" name="foods">&nbsp;Chinese<br></td>
+            </tr>
+            <tr>
+                <td colspan=2><input type="submit" value="Send Data"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

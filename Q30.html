@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Day5Q30</title>
+    <script>
+        function display() {
+
+            clearSpans();
+            var oid = document.getElementById("order_id"); 
+            var name = document.getElementById("cust_name");
+            var bdate = document.getElementById("bill_date");
+            var sdate = document.getElementById("ship_date");
+            var total = document.getElementById("Order_total");
+            if (oid.value == null || oid.value == "") {
+                mandatory("errorOid");
+                return 0;
+            }
+            if (name.value == null || name.value == "") {
+                mandatory("errorName");
+                return 0;
+            }
+            if (bdate.value == null || bdate.value == "") {
+                mandatory("bill_date_error");
+                return 0;
+            }
+            if (sdate.value == null || sdate.value == "") {
+                mandatory("errorSDate");
+                return 0;
+            }
+            if (total.value == null || total.value == "") {
+                mandatory("errorTotal");
+                return 0;
+            }
+
+            if (name.value.length < 6) {
+                document.getElementById("errorName").innerHTML = "Cust name cannot be < 6 characters";
+                focusOn(name);
+                return 0;
+            }
+
+            
+            if (bdate.value > sdate.value) {
+                document.getElementById("bill_date_error").innerHTML = "Billing Date cannot be greater than shipping date.";
+                focusOn(sdate);
+                return 0;
+            }
+
+            var Order = {
+                orderId: oid.value,
+                cust_name: name.value,
+                bill_date: bdate.value,
+                ship_date: sdate.value,
+                order_total: total.value
+
+            };
+
+            var orderTable = "<table cellspacing=0 cellpadding=10 border=1>" +
+                "<tr><td>Order ID:</td><td>"+Order.orderId+"</td></tr>" +
+                "<tr><td>Customer Name:</td><td>"+Order.cust_name+"</td></tr>" +
+                "<tr><td>Billing date:</td><td>"+Order.bill_date+"</td></tr>" +
+                "<tr><td>Shipping date:</td><td>"+Order.ship_date+"</td></tr>" +
+                "<tr><td>Order Total:</td><td>$&ensp;"+Order.order_total+"</td></tr>" +
+                "</table>";
+
+            
+            var myWindow = window.open("","Order details", "toolbar=no,scrollbars=no,resizable=no,width=400,height=400");
+            myWindow.document.write(orderTable);
+
+
+            function clearSpans() {
+                document.getElementById("errorOid").innerHTML = "";
+                document.getElementById("errorName").innerHTML = "";
+                document.getElementById("bill_date_error").innerHTML = "";
+                document.getElementById("errorSDate").innerHTML = "";
+                document.getElementById("errorTotal").innerHTML = "";
+            }
+
+            function focusOn(element) {
+                element.focus();
+            }
+
+            function mandatory(string) {
+                document.getElementById(string).innerHTML = "Mandarory Field";
+            }
+
+        }
+    </script>
+    <style>
+        form {
+            border: 3px solid green;
+            padding: 30px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+        }
+
+    </style>
+    
+</head>
+
+<body>
+    <form>
+        Order ID: &nbsp; <input type="number" id="order_id">&nbsp;<span id="errorOid"></span>
+        <p></p>
+        Customer Name: &nbsp; <input type="text" id="cust_name"><span id="errorName"></span>
+        <p></p>
+        Enter Billing date: &nbsp; <input type="date" id="bill_date"><span id="bill_date_error"></span>
+        <p></p>
+        Enter Shipping date: &nbsp; <input type="date" id="ship_date"><span id="errorSDate"></span>
+        <p></p>
+        Order Total: &nbsp; <input type="number" id="Order_total"><span id="errorTotal"></span>
+        <p></p>
+        <button type="button" onclick="display()">Display</button>
+    </form>
+
+
+
+</body>
+
+</html>
